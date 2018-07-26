@@ -1,0 +1,3 @@
+{{#power-select options=names selected=selected allowClear=allowClear onchange=(action (mut selected)) as |place|}}
+  {{place.streetNumber}} {{place.streetName}} {{place.zipcode}} {{place.city}} {{place.state}} {{place.country}}
+{{/power-select}}

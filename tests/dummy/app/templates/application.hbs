@@ -1,3 +1,20 @@
-<h2 id="title">Welcome to Ember</h2>
+<div class="wrapper">
+  {{power-select-places selected=selected allowClear=true}}
 
-{{outlet}}
+  <p>
+    Street address: {{input type="text" value=selected.streetNumber}} {{input type="text" value=selected.streetName}}
+  </p>
+
+  <p>
+    City {{input type="text" value=selected.city}}
+  </p>
+  <p>
+    State {{input type="text" value=selected.state}}
+  </p>
+  <p>
+    Zip code {{input type="text" value=selected.zipcode}}
+  </p>
+  <p>
+    Country {{input type="text" value=selected.country}}
+  </p>
+</div>
