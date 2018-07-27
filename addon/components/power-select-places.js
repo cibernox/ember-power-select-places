@@ -1,42 +1,38 @@
 import Component from "@ember/component";
 import layout from "../templates/components/power-select-places";
+import { debounce } from "@ember/runloop";
+import { autocompleteResponces, detailsResponces } from "../utils/google-place-details-responses";
+import EmberObject from '@ember/object';
 
 export default Component.extend({
   layout,
 
-  init(...args) {
-    this._super(...args);
-    this.names = [
-      {
-        id: 1,
-        streetNumber: "",
-        streetName: "",
-        zipcode: "78350",
-        city: "Jouy-en-Josas",
-        state: "Île-de-France",
-        country: "France"
-      }, {
-        id: 2,
-        streetNumber: "W2119",
-        streetName: "U.S. 2",
-        city: "Wilson",
-        state: "MI",
-        country: "USA"
-      }, {
-        id: 2,
-        streetNumber: "W2377",
-        streetName: "U.S. 10",
-        city: "Brillion",
-        state: "WI",
-        country: "USA"
-      }, {
-        id: 2,
-        streetNumber: "w2152",
-        streetName: "U.S. 14",
-        city: "Janesville",
-        state: "WI",
-        country: "USA"
+  actions: {
+    searchPlaces(term) {
+      debounce(this, this._setPlaces, term, 300);
+    },
+
+    selectPlace(place) {
+      if (place) {
+        const foundPlace = detailsResponces.find(detail => detail.result.place_id === place.place_id);
+        const selectedPlace = this._setPlaceAttrs(foundPlace);
+        this.setProperties({ selectedPlace, selected: place});
+      } else {
+        let selected, selectedPlace;
+        this.setProperties({ selected, selectedPlace });
       }
-    ];
+    }
+  },
+
+  _setPlaces(term) {
+    const matchedPlaces = autocompleteResponces.predictions
+      .filter(p => p.description.toLowerCase().includes(term.toLowerCase()));
+    this.set('places', matchedPlaces);
+  },
+
+  _setPlaceAttrs(place) {
+    const placeObj = EmberObject.create();
+    place.result.address_components.forEach(c => placeObj.set(c.types[0], c.long_name));
+    return placeObj;
   }
 });
