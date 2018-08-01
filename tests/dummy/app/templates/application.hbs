@@ -1,23 +1,24 @@
 <div class="wrapper">
   {{power-select-places selectedPlace=selected allowClear=true}}
-
   <p>
-    Street address: {{input value=selected.streetNumber}} {{input value=selected.route}}
-  </p>
-
-  <p>
-    City {{input value=selected.city}}
+    <strong>Steet nr.:</strong> {{selected.street_number}}
   </p>
   <p>
-    State {{input value=selected.locality}}
+    <strong>Steet name:</strong> {{selected.route}}
   </p>
   <p>
-    Area: {{input value=selected.administrative_area_level_1}}
+    <strong>City:</strong> {{selected.postal_town}}
   </p>
   <p>
-    Zip code {{input value=selected.zipcode}}
+    <strong>State:</strong> {{selected.administrative_area_level_2}}
   </p>
   <p>
-    Country {{input value=selected.country}}
+    <strong>Area:</strong> {{selected.neighborhood}}
+  </p>
+  <p>
+    <strong>Post Code:</strong> {{selected.postal_code}}
+  </p>
+  <p>
+    <strong>Country:</strong> {{selected.country}}
   </p>
 </div>

@@ -2,7 +2,7 @@
   options=places
   selected=selected
   allowClear=allowClear
-  search=(action 'searchPlaces')
-  onchange=(action 'selectPlace') as |place|}}
-  {{place.description}}
+  search=(perform searchPlacesTask)
+  onchange=(action 'selectPlace') as |place search|}}
+  {{place.formatted_address}}
 {{/power-select}}

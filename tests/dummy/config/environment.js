@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function(environment) {
+  console.log(process.env);
   let ENV = {
     modulePrefix: 'dummy',
     environment,
@@ -20,7 +21,8 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+    googlePlacesApiKey: process.env.GOOGLE_PLACES_API_KEY,
   };
 
   if (environment === 'development') {
